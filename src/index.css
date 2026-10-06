@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --color-emerald-deep: #07130F;
+  --color-emerald-dark: #0B1C16;
+  --color-emerald-surface: #0F251E;
+  --color-emerald-card: #0D201A;
+  --color-emerald-border: #1B3C31;
+
+  --color-gold-light: #F7E9C4;
+  --color-gold-base: #DFBE82;
+  --color-gold-metallic: #D4AF37;
+  --color-gold-dark: #9E7B26;
+
+  --color-text-ivory: #FBF9F5;
+  --color-text-secondary: #9EABA2;
+}
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #07130F;
+    color: #FBF9F5;
+    scroll-behavior: smooth;
+  }
+
+  /* Custom subtle luxury scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #07130F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1B3C31;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+  }
+}
+
+/* Luxury gold text shimmer & gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FBF9F5 0%, #DFBE82 40%, #D4AF37 75%, #F7E9C4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-pure {
+  background: linear-gradient(135deg, #F7E9C4 0%, #DFBE82 50%, #B89228 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold-subtle {
+  border-color: rgba(212, 175, 55, 0.22);
+}
+
+.border-gold-focus {
+  border-color: rgba(223, 190, 130, 0.45);
+}
+
+.bg-emerald-glass {
+  background-color: rgba(11, 28, 22, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ==========================================================================
+   Luxury Scroll Reveal & Cinematic Transitions
+   ========================================================================== */
+
+/* Easing: cubic-bezier(0.22, 1, 0.36, 1) - Luxury Quartic Ease-Out */
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-left {
+  opacity: 0;
+  transform: translateX(-28px) scale(0.98);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale-up {
+  opacity: 0;
+  transform: scale(0.97) translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Triggered State */
+.is-revealed.reveal-fade-up,
+.is-revealed .reveal-fade-up,
+.is-revealed.reveal-fade-left,
+.is-revealed .reveal-fade-left,
+.is-revealed.reveal-fade-right,
+.is-revealed .reveal-fade-right,
+.is-revealed.reveal-scale-up,
+.is-revealed .reveal-scale-up {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Subtle Hero Cinematic Zoom */
+@keyframes subtleHeroZoom {
+  0% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+.animate-hero-zoom {
+  animation: subtleHeroZoom 22s infinite alternate cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

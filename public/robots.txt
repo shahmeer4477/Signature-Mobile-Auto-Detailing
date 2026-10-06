@@ -1,0 +1,7 @@
+# Robots.txt for Signature Mobile Auto Detailing
+# Centralized configuration allows public search engines to index all canonical routes.
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://YOUR-DOMAIN-HERE.com/sitemap.xml

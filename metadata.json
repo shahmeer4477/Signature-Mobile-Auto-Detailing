@@ -1,0 +1,6 @@
+{
+  "name": "Signature Mobile Auto Detailing",
+  "description": "Signature Mobile Auto Detailing provides premium mobile auto detailing with professional care delivered directly to your location.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
