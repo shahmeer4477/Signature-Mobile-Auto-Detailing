@@ -80,6 +80,9 @@ export const Services: React.FC<ServicesProps> = ({ onSelectServiceToBook }) => 
                 <h3 className="font-['Cinzel','Cormorant_Garamond',serif] text-lg sm:text-xl font-bold tracking-[0.06em] text-[#FBF9F5] group-hover:text-[#DFBE82] transition-colors leading-snug">
                   EXTERIOR DETAIL
                 </h3>
+                <div className="text-xl sm:text-2xl font-bold font-['Cinzel',serif] text-[#DFBE82] mt-1.5">
+                  $169
+                </div>
 
                 <p className="text-xs sm:text-sm text-[#9EABA2] font-normal leading-relaxed mt-2.5 mb-5 min-h-[42px]">
                   Complete exterior care designed to refresh, protect and enhance your vehicle's finish.
@@ -152,6 +155,9 @@ export const Services: React.FC<ServicesProps> = ({ onSelectServiceToBook }) => 
                 <h3 className="font-['Cinzel','Cormorant_Garamond',serif] text-lg sm:text-xl font-bold tracking-[0.06em] text-[#FBF9F5] group-hover:text-[#DFBE82] transition-colors leading-snug">
                   INTERIOR DETAIL
                 </h3>
+                <div className="text-xl sm:text-2xl font-bold font-['Cinzel',serif] text-[#DFBE82] mt-1.5">
+                  $189
+                </div>
 
                 <p className="text-xs sm:text-sm text-[#9EABA2] font-normal leading-relaxed mt-2.5 mb-5 min-h-[42px]">
                   Thorough interior care focused on a clean, refreshed and comfortable cabin.
@@ -230,6 +236,9 @@ export const Services: React.FC<ServicesProps> = ({ onSelectServiceToBook }) => 
                 <h3 className="font-['Cinzel','Cormorant_Garamond',serif] text-lg sm:text-xl font-bold tracking-[0.06em] text-[#FBF9F5] group-hover:text-[#DFBE82] transition-colors leading-snug">
                   FULL SIGNATURE DETAIL
                 </h3>
+                <div className="text-xl sm:text-2xl font-bold font-['Cinzel',serif] text-[#DFBE82] mt-1.5">
+                  $229
+                </div>
 
                 <p className="text-xs sm:text-sm text-[#9EABA2] font-normal leading-relaxed mt-2.5 mb-5 min-h-[42px]">
                   Complete interior and exterior care designed to give your vehicle a deep clean, refreshed appearance, and a polished Signature finish.
