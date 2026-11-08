@@ -7,12 +7,14 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 
 interface BookingFormProps {
   initialServiceId?: string;
+  initialNotes?: string;
   isModal?: boolean;
   onClose?: () => void;
 }
 
 export const BookingForm: React.FC<BookingFormProps> = ({
   initialServiceId,
+  initialNotes,
   isModal = false,
   onClose,
 }) => {
@@ -28,7 +30,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({
     preferredTime: '',
     location: '',
     zipCode: '',
-    additionalNotes: '',
+    additionalNotes: initialNotes || '',
   });
 
   useEffect(() => {
@@ -36,6 +38,12 @@ export const BookingForm: React.FC<BookingFormProps> = ({
       setFormData((prev) => ({ ...prev, service: initialServiceId }));
     }
   }, [initialServiceId]);
+
+  useEffect(() => {
+    if (initialNotes !== undefined) {
+      setFormData((prev) => ({ ...prev, additionalNotes: initialNotes }));
+    }
+  }, [initialNotes]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

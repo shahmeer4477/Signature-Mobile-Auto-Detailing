@@ -16,31 +16,83 @@ import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { InstagramButton } from './components/InstagramButton';
 import { LegalModal } from './components/LegalModal';
+import { NovemberSpecialModal } from './components/NovemberSpecialModal';
 import { X } from 'lucide-react';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState<string | undefined>(undefined);
+  const [selectedNotes, setSelectedNotes] = useState<string | undefined>(undefined);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | null>(null);
+  const [specialOfferOpen, setSpecialOfferOpen] = useState(false);
 
-  const handleOpenBooking = (serviceId?: string) => {
+  // Show promotional popup after short initial delay if not dismissed this session
+  useEffect(() => {
+    try {
+      const hasDismissed = sessionStorage.getItem('nov_special_offer_dismissed');
+      if (!hasDismissed) {
+        const timer = setTimeout(() => {
+          setSpecialOfferOpen(true);
+        }, 1600);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      const timer = setTimeout(() => {
+        setSpecialOfferOpen(true);
+      }, 1600);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleCloseSpecialOffer = () => {
+    try {
+      sessionStorage.setItem('nov_special_offer_dismissed', 'true');
+    } catch {
+      // Ignore private browsing sessionStorage limitations
+    }
+    setSpecialOfferOpen(false);
+  };
+
+  const handleClaimSpecialOffer = (
+    serviceId: string,
+    notes: string
+  ) => {
+    try {
+      sessionStorage.setItem('nov_special_offer_dismissed', 'true');
+    } catch {
+      // Ignore
+    }
+    setSpecialOfferOpen(false);
     setSelectedServiceId(serviceId);
+    setSelectedNotes(notes);
+    setBookingModalOpen(true);
+  };
+
+  const handleOpenBooking = (serviceId?: string, notes?: string) => {
+    setSelectedServiceId(serviceId);
+    setSelectedNotes(notes);
     setBookingModalOpen(true);
   };
 
   const handleSelectServiceForQuote = (serviceId: string) => {
     setSelectedServiceId(serviceId);
+    setSelectedNotes(undefined);
     setBookingModalOpen(true);
   };
 
   // Lock background scroll when modal is open and allow closing via ESC key
   useEffect(() => {
-    if (bookingModalOpen || legalModalType) {
+    if (bookingModalOpen || legalModalType || specialOfferOpen) {
       document.body.style.overflow = 'hidden';
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
-          setBookingModalOpen(false);
-          setLegalModalType(null);
+          if (bookingModalOpen) {
+            setBookingModalOpen(false);
+          } else if (specialOfferOpen) {
+            handleCloseSpecialOffer();
+          } else if (legalModalType) {
+            setLegalModalType(null);
+          }
         }
       };
       window.addEventListener('keydown', handleKeyDown);
@@ -49,7 +101,7 @@ export default function App() {
         window.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [bookingModalOpen, legalModalType]);
+  }, [bookingModalOpen, legalModalType, specialOfferOpen]);
 
   const scrollToServices = () => {
     const el = document.getElementById('services');
@@ -166,12 +218,20 @@ export default function App() {
               <BookingForm
                 isModal={true}
                 initialServiceId={selectedServiceId}
+                initialNotes={selectedNotes}
                 onClose={() => setBookingModalOpen(false)}
               />
             </div>
           </div>
         </div>
       )}
+
+      {/* November Special Offer Promotional Popup */}
+      <NovemberSpecialModal
+        isOpen={specialOfferOpen}
+        onClose={handleCloseSpecialOffer}
+        onClaimOffer={handleClaimSpecialOffer}
+      />
 
       {/* Privacy Policy & Terms Modal */}
       <LegalModal
